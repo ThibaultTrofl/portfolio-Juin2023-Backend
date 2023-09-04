@@ -1,12 +1,12 @@
-const Experiences = require("../../../models/Experiences");
+const Degrees = require("../../../models/Degrees");
 const convertToBase64 = require("../../../utils/convertToBase64");
 const cloudinary = require("cloudinary").v2;
 
-async function postExperiences(req, res) {
+async function postDegrees(req, res) {
   try {
-    const newExperiences = await new Experiences({
-      jobTitle: req.body.jobTitle,
-      company: req.body.company,
+    const newDegrees = await new Degrees({
+      degree: req.body.degree,
+      school: req.body.school,
       link: req.body.link,
       country: req.body.country,
       location: {
@@ -16,24 +16,31 @@ async function postExperiences(req, res) {
       },
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      missions: [req.body.missions1, req.body.missions2, req.body.missions3],
+      missions: {
+        1: req.body.missions1,
+        2: req.body.missions2,
+        3: req.body.missions3,
+        4: req.body.missions4,
+        5: req.body.missions5,
+        6: req.body.missions6,
+      },
     });
 
     const picture = await cloudinary.uploader.upload(
       convertToBase64(req.files.logo),
       {
-        folder: `/Perso/Experiences/`,
+        folder: `/Perso/Degrees/`,
       }
     );
 
     const urlPicture = picture.secure_url;
 
-    newExperiences.logo = urlPicture;
+    newDegrees.logo = urlPicture;
 
-    await newExperiences.save();
+    await newDegrees.save();
 
     return res.status(200).json({
-      newExperiences,
+      newDegrees,
     });
   } catch (error) {
     console.log(error.message);
@@ -43,4 +50,4 @@ async function postExperiences(req, res) {
   }
 }
 
-module.exports = { postExperiences };
+module.exports = { postDegrees };

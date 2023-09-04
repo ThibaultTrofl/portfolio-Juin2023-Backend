@@ -9,7 +9,7 @@ const Experiences = mongoose.model("Experiences", {
   location: Object,
   startDate: String,
   endDate: String,
-  missions: Object,
+  missions: Array,
 });
 
 module.exports = Experiences;

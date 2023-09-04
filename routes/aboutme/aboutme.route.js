@@ -10,11 +10,13 @@ const { getDegrees } = require("./aboutmeController/getDegrees.js");
 const { getExperiences } = require("./aboutmeController/getExperiences.js");
 const { postSkills } = require("./aboutmeController/postSkills.js");
 const { postExperiences } = require("./aboutmeController/postExperiences.js");
+const { postDegrees } = require("./aboutmeController/postDegrees.js");
 
 aboutmeRoute.get("/aboutme/skills", getSkills);
 aboutmeRoute.get("/aboutme/degrees", getDegrees);
 aboutmeRoute.get("/aboutme/experiences", getExperiences);
 aboutmeRoute.post("/aboutme/skills/add", fileUpload(), postSkills);
 aboutmeRoute.post("/aboutme/experiences/add", fileUpload(), postExperiences);
+aboutmeRoute.post("/aboutme/degrees/add", fileUpload(), postDegrees);
 
 module.exports = aboutmeRoute;
