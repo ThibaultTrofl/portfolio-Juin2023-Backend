@@ -21,6 +21,9 @@ mongoose.connect(process.env.MONGODB_URI);
 const aboutMeRoutes = require("./routes/aboutme/aboutme.route.js");
 app.use(aboutMeRoutes);
 
+const projectsRoutes = require("./routes/projects/projects.route.js");
+app.use(projectsRoutes);
+
 app.get("/", (req, res) => {
   res.json("Ok");
 });
